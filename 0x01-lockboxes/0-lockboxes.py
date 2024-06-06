@@ -4,7 +4,7 @@
 
 def canUnlockAll(boxes):
     '''method that determines if all the boxes can be opened.'''
-    if(type(boxes) is not list or len(boxes) == 0):
+    if not isinstance(boxes, list) or len(boxes) == 0:
         return False
     openedSet = set()
     Unlock(boxes, openedSet, 0)
@@ -12,7 +12,7 @@ def canUnlockAll(boxes):
 
 
 def Unlock(boxes, openedSet, index):
-    '''return a set of all unlocked boxes'''
+    '''Recursively opens boxes and adds keys to the openedSet.'''
     if index not in openedSet:
         openedSet.add(index)
         for key in boxes[index]:
