@@ -4,6 +4,8 @@
 
 def canUnlockAll(boxes):
     '''method that determines if all the boxes can be opened.'''
+    if(type(boxes) is not list or len(boxes) == 0):
+        return False
     openedSet = set()
     Unlock(boxes, openedSet, 0)
     return len(boxes) == len(openedSet)
