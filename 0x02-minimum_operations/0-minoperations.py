@@ -11,7 +11,7 @@ def minOperations(n):
     if n <= 1:
         return 0
     if n % 3 == 0:
-        return minOperations(n / 3) + 3
+        return minOperations(n // 3) + 3
     if n % 2 == 0:
-        return minOperations(n / 2) + 2
+        return minOperations(n // 2) + 2
     return n
