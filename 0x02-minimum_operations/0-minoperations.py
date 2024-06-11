@@ -10,7 +10,7 @@ def minOperations(n):
 
     if n <= 1 or not isinstance(n, int):
         return 0
-    for i in range(2, 8):
+    for i in range(2, n):
         if n % i == 0:
             return minOperations(n // i) + i
     return n
