@@ -25,4 +25,4 @@ def validUTF8(data):
             if countOnes(i) != 1:
                 return False
             bytes_count -= 1
-    return True
+    return bytes_count == 0
