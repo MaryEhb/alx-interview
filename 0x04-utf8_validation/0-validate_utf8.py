@@ -19,10 +19,12 @@ def validUTF8(data):
     for i in data:
         if bytes_count == 0:
             bytes_count = countOnes(i)
+            if bytes_count == 0:
+                continue
             if bytes_count > 4 or bytes_count == 1:
                 return False
         else:
             if countOnes(i) != 1:
                 return False
-            bytes_count -= 1
+        bytes_count -= 1
     return bytes_count == 0
