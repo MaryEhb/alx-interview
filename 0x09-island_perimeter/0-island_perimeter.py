@@ -1,9 +1,8 @@
 #!/usr/bin/python3
 """0. Island Perimeter"""
-from typing import List
 
 
-def island_perimeter(grid: List[List[int]]) -> int:
+def island_perimeter(grid):
     """
     returns the perimeter of the island described in grid
     grid is a list of list of integers:
@@ -17,6 +16,7 @@ def island_perimeter(grid: List[List[int]]) -> int:
         - The island doesn’t have “lakes” (water inside that isn’t
           connected to the water surrounding the island).
     """
+
     perimeter = 0
     width = len(grid[0])
     height = len(grid)
@@ -32,11 +32,4 @@ def island_perimeter(grid: List[List[int]]) -> int:
                     perimeter += 1
                 if j == 0 or grid[i][j - 1] == 0:
                     perimeter += 1
-            elif (grid[i][j] == 0
-                  and i > 0 and grid[i - 1][j] == 1
-                  and i + 1 < height and grid[i + 1][j] == 1
-                  and j + 1 < width and grid[i][j + 1] == 1
-                  and j > 0 and grid[i][j - 1] == 1):
-                return 0
-
     return perimeter
