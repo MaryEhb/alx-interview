@@ -6,6 +6,7 @@ number from the set and removing that number and its multiples from
 the set. The player that cannot make a move loses the game.
 """
 
+
 def calcPrime(n):
     """returns list of primes to the given number included"""
     primList = []
@@ -20,7 +21,9 @@ def calcPrime(n):
             primList.append(num)
     return primList
 
+
 primesList = calcPrime(1000)
+
 
 def isWinner(x, nums):
     """
@@ -31,7 +34,9 @@ def isWinner(x, nums):
     You can assume n and x will not be larger than 10000
     You cannot import any packages in this task
     """
-    if not x or x < 1 or not nums or not isinstance(nums, list) or not len(nums):
+    condition = (not x or x < 1 or not nums
+                 or not isinstance(nums, list) or not len(nums))
+    if condition:
         return None
 
     score = 0
