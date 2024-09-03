@@ -8,13 +8,12 @@ the set. The player that cannot make a move loses the game.
 
 
 def calcPrime(n):
-    """returns list of primes to the given number included"""
+    """Returns a list of primes up to and including n."""
     primList = []
-
     for num in range(2, n + 1):
         prime = True
         for i in range(2, int(num ** 0.5) + 1):
-            if (num % i == 0):
+            if num % i == 0:
                 prime = False
                 break
         if prime:
@@ -22,39 +21,46 @@ def calcPrime(n):
     return primList
 
 
-primesList = calcPrime(1000)
+def primes_in_range(primesList, n):
+    """Return a list of primes up to and including n."""
+    return [p for p in primesList if p <= n]
 
 
 def isWinner(x, nums):
     """
-    function calculate winner
-    where x is the number of rounds and nums is an array of n
-    Return: name of the player that won the most rounds
-    If the winner cannot be determined, return None
-    You can assume n and x will not be larger than 10000
-    You cannot import any packages in this task
+    Function to calculate the winner of the prime game.
+    x: the number of rounds.
+    nums: list of n values for each round.
+    Return: name of the player that won the most rounds.
     """
-    condition = (not x or x < 1 or not nums
-                 or not isinstance(nums, list) or not len(nums))
-    if condition:
+    if x < 1 or not nums or len(nums) != x:
         return None
 
-    score = 0
-    for i in range(x):
-        n = nums[i]
-        while n > 1:
-            if n in primesList:
-                if (primesList.index(n) + 1) % 2:
-                    score += 1
-                else:
-                    score -= 1
-                break
-            n -= 1
-        if n == 1:
-            score += 1
+    primesList = calcPrime(1000)
+    mariaWins = 0
+    benWins = 0
 
-    if score > 0:
-        return 'Ben'
-    if score < 0:
-        return 'Maria'
-    return None
+    for n in nums:
+        primesSet = primes_in_range(primesList, n)
+        if not primesSet:
+            benWins += 1
+            continue
+
+        isMariaTurn = True
+
+        while primesSet:
+            smallestPrime = primesSet.pop(0)
+            primesSet = [p for p in primesSet if p % smallestPrime != 0]
+            isMariaTurn = not isMariaTurn
+
+        if isMariaTurn:
+            benWins += 1
+        else:
+            mariaWins += 1
+
+    if mariaWins > benWins:
+        return "Maria"
+    elif benWins > mariaWins:
+        return "Ben"
+    else:
+        return None
